@@ -1,0 +1,5 @@
+Implements of  Singleton 
+
+public enum Singleton {
+   INSTANCE;
+}
