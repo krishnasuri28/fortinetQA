@@ -1,0 +1,34 @@
+Given a list of numbers, see if you can separate them in to k groups such that each group has the same sum. 
+
+public class SeprateTest {
+	
+	static boolean isSubsetSum (List<Integer> list, int n, int sum)
+	{
+		
+		if (sum == 0)
+			return true;
+		if (n == 0 && sum != 0)
+			return false;
+
+		if (Integer.parseInt(list.get(n-1).toString()) > sum)
+			return isSubsetSum (list, n-1, sum);
+
+		
+		return isSubsetSum (list, n-1, sum) ||
+			isSubsetSum (list, n-1, sum-Integer.parseInt(list.get(n-1).toString()));
+	}
+
+	
+public boolean separate(List<Integer> list, int k){
+	
+	int sum = 0;
+	for (int i = 0; i < k; i++)
+		sum += Integer.parseInt(list.get(i).toString());
+
+	
+	if (sum%2 != 0)
+		return false;
+
+	return isSubsetSum (list, k, sum/2);
+}
+}
