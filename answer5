@@ -1,0 +1,19 @@
+When the project is using Spring 4.3  and Hibernate 5.2, how to write the JUnit test without bounded with concrete DB closely. In other words, How to mock DB in JUnit test for service method.  If not possible give the reason else list cases for the different scenario. 
+
+@Ignore
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath*:unitTestFullConfig.xml")
+public class InMemoryDBFullTestBaseClass {
+}
+
+public final class ActorServiceImplTest extends InMemoryDBFullTestBaseClass {
+   @Inject
+    private ActorService service;
+
+    @Test
+    public final void saveActor () throws Exception {
+        service.save(new ActorDTO(null, "testName", "testSurname", new Date(), Collections.emptyList()));
+
+        assertEquals(1, service.getAll().size());
+    }
+}
